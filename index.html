@@ -8,19 +8,21 @@ const app = new PIXI.Application({ backgroundColor: 0x1099bb });
 document.body.appendChild(app.view);
 
 // create a texture from an image path
-const texture = PIXI.Texture.from('images/bunny.png');
+const textures = [PIXI.Texture.from('images/danidanon.png'), 
+				  PIXI.Texture.from('images/chase.png')]
 
 // Scale mode for pixelation
 texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < textures.length; i++) {
     createBunny(
-        Math.floor(Math.random() * app.screen.width),
-        Math.floor(Math.random() * app.screen.height),
+        ((i % 10) * (app.screen.width / 10)) + Math.floor(Math.random() * app.screen.width / 10),
+        ((i / 10) * (app.screen.width / 10)) Math.floor(Math.random() * app.screen.height / 10),
+        textures[i]
     );
 }
 
-function createBunny(x, y) {
+function createBunny(x, y, texture) {
     // create our little bunny friend..
     const bunny = new PIXI.Sprite(texture);
 
